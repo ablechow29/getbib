@@ -15,14 +15,26 @@ Each bibliographic entry looks like this:
     pages   = "342--351"
 }
 ```
-I used a version of this script while writing my M.S. thesis to create my LaTeX bibliography. However,
+I used a version of this script while writing my M.S. thesis to create my LaTeX bibliography. However, this scrip was (and still) does not reliably extract DOI strings from PDF files. 
 
-Requires the DOI to be entered directly
-attach example .bib file
+The primary reason being:
+1. DOI only being included in the PDF metadata in rare cases.
+2. DOI written in different formats with different prefixes
+3. DOI being written in different areas of the document
 
-The script getbib.sh is my work in progress version
+The goal is to be able to fill out bib files by running the getbib scrip in a for loop like this:
+`for file in *pdf; do ~/Learn_Bash/getbib/getbibtest.sh $file >> bibliography.bib; done`
+And for rare cases of DOI not being found, the script will prompt the user to enter the DOI string manually.
 
-The idea
+## Development Strategy
+I am approaching this script as a long term project in which I will learn and excercise basic BASH scripting skills.
+
+Testing strategies
+
+### Goals
+1. The script needs to reliably obtain DOI strings from PDF files, except in rare cases where the DOI is actually not present, or formatted in a strange way.
+2. The script needs to echo "grep failed" when the DOI strong could not be found.
+3. The script needs to integrate input for bibliography management, such as the example entry will automatically have `greenwade93` as its code name or give the user an opportunity to input.
 
 ## To Do
 Add test files for different file scenarios
